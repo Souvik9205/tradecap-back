@@ -34,7 +34,7 @@ app.use("/api/projects", projectsRouter);
 app.use("/api/files", fileRouter);
 
 app.get("/", (req, res) => {
-  res.status(200).send("Welcome to PM API");
+  res.status(200).send("Welcome to Tradetap API");
 });
 
 // 404 route.
