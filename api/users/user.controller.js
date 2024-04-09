@@ -19,7 +19,6 @@ module.exports = {
   login: (req, res) => {
     const body = req.body;
 
-    console.log("login received", body);
 
     getUserByUserEmail(body, (err, results) => {
       if (err) {
@@ -32,14 +31,20 @@ module.exports = {
         });
       }
 
+      const header = {
+        "alg": "HS256", // Specify the signing algorithm (e.g., HMAC SHA-256)
+        "typ": "JWT"    // Specify the type of token (JWT)
+      };
+
       const result = compareSync(body.password, results.password);
       if (result) {
         results.password = undefined;
         const jsontoken = sign(
-          { result: results },
+          { result },
           process.env.JWT_SECRET_KEY,
           {
             expiresIn: "12h",
+            header,
           }
         );
         return res.json({

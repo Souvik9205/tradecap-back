@@ -13,7 +13,7 @@ module.exports = {
   getUserByUserEmail: (data, callBack) => {
     pool.query(
       `select * from users where email = ?`,
-      [data.email],
+      [data.username],
       (error, results, fields) => {
         if (error) {
           callBack(error);
