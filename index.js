@@ -9,10 +9,9 @@ const path = require("path");
 //jatinder
 const fs = require("fs");
 const http = require("http");
-const userRouter = require("./api/users/user.router");
-const messagesRouter = require("./api/messages/message.router");
-const projectsRouter = require("./api/projects/projects.router");
 
+const paymentsRouter = require("./api/payments/payments.router");
+const userRouter = require("./api/users/user.router");
 const fileRouter = require("./api/file/file.router");
 
 const clusters = require("cluster");
@@ -27,12 +26,10 @@ app.use(
 ); // include before other routes
 
 //app.use(express.static(path.join(__dirname, "./client/out")))
-app.use("/api/messages", messagesRouter);
-app.use("/api/users", userRouter);
-app.use("/api/projects", projectsRouter);
 
 app.use("/api/files", fileRouter);
-
+app.use("/api/users", userRouter);
+app.use("/api/payments", paymentsRouter);
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to Tradetap API");
 });

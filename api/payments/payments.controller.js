@@ -6,9 +6,10 @@ const {
   getProjects,
   getuserdetails,
 
-  getProjectrequirements,
+  getpayments,
   createprojectrequirement,
-} = require("./projects.service");
+  updatepayment,
+} = require("./payments.service");
 
 module.exports = {
   getProjects: (req, res) => {
@@ -23,8 +24,8 @@ module.exports = {
       });
     });
   },
-  getProjectrequirements: (req, res) => {
-    getProjectrequirements(req, (err, results) => {
+  getPayments: (req, res) => {
+    getpayments(req, (err, results) => {
       if (err) {
         console.log(err);
         return;
@@ -37,6 +38,18 @@ module.exports = {
   },
   Createprojectrequirements: (req, res) => {
     createprojectrequirement(req, (err, results) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      return res.json({
+        success: 1,
+        data: results,
+      });
+    });
+  },
+  Updatepayment: (req, res) => {
+    updatepayment(req, (err, results) => {
       if (err) {
         console.log(err);
         return;

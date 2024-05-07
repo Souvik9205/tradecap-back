@@ -18,7 +18,7 @@ const {
 module.exports = {
   login: (req, res) => {
     const body = req.body;
-    console.log("user login", body);
+    //console.log("user login", body);
 
     getUserByUserEmail(body, (err, results) => {
       if (err) {

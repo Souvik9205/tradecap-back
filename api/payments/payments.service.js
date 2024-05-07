@@ -37,14 +37,16 @@ module.exports = {
       }
     );
   },
-  getProjectrequirements: (req, callBack) => {
+  getpayments: (req, callBack) => {
     let data = req.body;
 
-    const user = req.decoded.result;
+    //console.log("payment request", data);
+
+    //const user = req.decoded.result;
 
     pool.query(
-      `select * from project_requirements where id=? order by id desc`,
-      [data.project_id],
+      `select * from payments  order by id desc`,
+      [],
       (error, results, fields) => {
         if (error) {
           console.log(error.sql);
@@ -63,6 +65,24 @@ module.exports = {
     pool.query(
       `insert into project_requirements(title,project_id)`,
       [data.title, data.project_id],
+      (error, results, fields) => {
+        if (error) {
+          console.log(error.sql);
+          callBack(error);
+        }
+
+        return callBack(null, results);
+      }
+    );
+  },
+  updatepayment: (req, callBack) => {
+    let data = req.body;
+    console.log("updating payment", data);
+    const user = req.decoded.result;
+
+    pool.query(
+      `update payments set status="DONE" where id=?`,
+      [data.id],
       (error, results, fields) => {
         if (error) {
           console.log(error.sql);
