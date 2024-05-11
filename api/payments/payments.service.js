@@ -77,9 +77,28 @@ module.exports = {
   },
   updatepayment: (req, callBack) => {
     let data = req.body;
-    console.log("updating payment", data);
+    //console.log("updating payment", data);
     const user = req.decoded.result;
+    //console.log("this is user detail", user);
+    pool.query(
+      `update payments set status="DONE" where id=?`,
+      [data.id],
+      (error, results, fields) => {
+        if (error) {
+          console.log(error.sql);
+          callBack(error);
+        }
 
+        return callBack(null, results);
+      }
+    );
+  },
+  uploadpayment: (req, callBack) => {
+    let data = req.body;
+    console.log("upload payment", data);
+    exit();
+    const user = req.decoded.result;
+    //console.log("this is user detail", user);
     pool.query(
       `update payments set status="DONE" where id=?`,
       [data.id],

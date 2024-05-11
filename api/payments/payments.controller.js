@@ -9,6 +9,7 @@ const {
   getpayments,
   createprojectrequirement,
   updatepayment,
+  uploadpayment,
 } = require("./payments.service");
 
 module.exports = {
@@ -50,6 +51,18 @@ module.exports = {
   },
   Updatepayment: (req, res) => {
     updatepayment(req, (err, results) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      return res.json({
+        success: 1,
+        data: results,
+      });
+    });
+  },
+  Uploadpayment: (req, res) => {
+    uploadpayment(req, (err, results) => {
       if (err) {
         console.log(err);
         return;

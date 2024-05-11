@@ -5,9 +5,12 @@ const {
   getPayments,
   Createprojectrequirements,
   Updatepayment,
+  Uploadpayment,
 } = require("./payments.controller");
 router.post("/", getPayments);
 const { checkToken } = require("../../auth/token_validation");
+
+router.post("/uploadpayment", Uploadpayment);
 
 //router.post("/", checkToken, getProjects);
 
