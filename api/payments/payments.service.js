@@ -100,7 +100,7 @@ module.exports = {
     const user = req.decoded.result;
     //console.log("this is user detail", user);
     pool.query(
-      `update payments set status="DONE" where id=?`,
+      `insert payments set status="DONE" where id=?`,
       [data.id],
       (error, results, fields) => {
         if (error) {
