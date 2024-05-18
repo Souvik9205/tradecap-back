@@ -11,6 +11,7 @@ const app = express();
 
 module.exports = {
   getUserByUserEmail: (data, callBack) => {
+    console.log("login data request", data);
     pool.query(
       `select * from users where email = ?`,
       [data.username],
@@ -18,7 +19,7 @@ module.exports = {
         if (error) {
           callBack(error);
         }
-        console.log("results", results);
+        //console.log("results", results);
         return callBack(null, results[0]);
       }
     );
