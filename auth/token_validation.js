@@ -4,6 +4,8 @@ module.exports = {
   checkToken: (req, res, next) => {
     let token = req.headers.authorization;
 
+    //Iam jatinder
+
     // Check if the token exists and has double quotation marks
     if (token && token.startsWith('"') && token.endsWith('"')) {
       // Remove double quotation marks
