@@ -2,15 +2,16 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   checkToken: (req, res, next) => {
-    let token = req.get("authorization");
+    let token = req.headers.authorization;
 
-    //console.warn(token);
-    //console.warn(process.env.JWT_SECRET_KEY);
+    // Check if the token exists and has double quotation marks
+    if (token && token.startsWith('"') && token.endsWith('"')) {
+      // Remove double quotation marks
+      token = token.slice(1, -1);
+    }
+
     if (token) {
-      // Remove Bearer from string
-
-      token = token.slice(7);
-      //console.warn(token);
+      // Verify the token
       jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
         if (err) {
           return res.json({
@@ -34,12 +35,7 @@ module.exports = {
     let token = req.get("authorization");
     let tokenstored = "bFpW1Lnonkd9fmoCMXDOWMpEIanPe7Jz";
 
-    //console.warn(token);
-    //console.warn(process.env.JWT_SECRET_KEY);
     if (token) {
-      // Remove Bearer from string
-
-      //console.warn(token);
       if (token == tokenstored) {
         next();
       }
